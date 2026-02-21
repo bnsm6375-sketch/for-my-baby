@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#2e1065,#4c1d95,#7c3aed);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* Floating Hearts Background */
+.hearts{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+overflow:hidden;z-index:0;pointer-events:none;
+}
+.hearts span{
+position:absolute;
+bottom:-50px;
+font-size:20px;
+animation:floatUp 10s linear infinite;
+opacity:0.6;
+}
+@keyframes floatUp{
+0%{transform:translateY(0) scale(0.8);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-110vh) scale(1.3);opacity:0}
+}
+
+/* Sections */
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:60px 20px;
+text-align:center;
+position:relative;
+z-index:1;
+}
+
+h1,h2{
+font-family:'Playfair Display',serif;
+margin-bottom:20px;
+color:#e9d5ff; /* Light purple */
+text-shadow:0 0 10px rgba(168,85,247,0.5);
+}
+
+h1{font-size:2.8rem}
+h2{font-size:2.2rem}
+
+p{max-width:700px;line-height:1.6;margin-bottom:20px;color:#d8b4fe}
+
+.btn{
+background:linear-gradient(45deg,#a855f7,#7c3aed);
+border:none;
+padding:15px 30px;
+border-radius:25px;
+color:white;
+font-size:1rem;
+cursor:pointer;
+box-shadow:0 4px 15px rgba(124,58,237,0.4);
+transition:all 0.3s ease;
+border:1px solid rgba(255,255,255,0.2);
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(124,58,237,0.6)}
+
+.card{
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:25px;
+box-shadow:0 8px 32px 0 rgba(31,38,135,0.37);
+margin:15px;
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,0.18);
+transition:all 0.3s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(124,58,237,0.3)}
+
+.grid{
+display:grid;
+gap:20px;
+width:100%;
+max-width:1000px;
+}
+.photos{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+.memories{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+
+.photo-placeholder{
+height:200px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+transition:all 0.3s ease;
+overflow:hidden;
+}
+.photo-placeholder:hover{transform:scale(1.03);box-shadow:0 8px 25px rgba(168,85,247,0.4)}
+
+.photo-placeholder img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:15px;
+}
+
+/* MUSIC PLAYER SECTION */
+.music-section{background:transparent;}
+.music-container{
+background:rgba(20,20,40,0.6);
+padding:40px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(15px);
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+width:100%;
+max-width:500px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+overflow:hidden;
+}
+.music-container::before{
+content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+background:radial-gradient(circle,rgba(124,58,237,0.2) 0%,transparent 70%);pointer-events:none;
+}
+.song-info{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;width:100%;}
+.album-art{
+width:120px;height:120px;border-radius:20px;margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);overflow:hidden;position:relative;
+}
+.album-art img{width:100%;height:100%;object-fit:cover;animation:spin 10s linear infinite;animation-play-state:paused;}
+.album-art.playing img{animation-play-state:running;}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.song-title{font-size:1.5rem;font-weight:600;color:white;margin-bottom:5px;font-family:'Poppins',sans-serif;}
+.artist-name{font-size:0.9rem;color:#a78bfa;letter-spacing:1px;margin-bottom:25px;}
+.progress-container{width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:10px;margin-bottom:30px;position:relative;cursor:pointer;overflow:hidden;}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#c084fc,#a855f7);border-radius:10px;transition:width 0.1s linear;position:relative;}
+.progress-bar::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:10px;height:10px;background:white;border-radius:50%;box-shadow:0 0 10px white;}
+.controls{display:flex;justify-content:center;align-items:center;gap:30px;}
+.control-btn{background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;opacity:0.7;transition:0.3s;}
+.control-btn:hover{opacity:1;transform:scale(1.1)}
+.play-btn{width:60px;height:60px;background:linear-gradient(135deg,#c084fc,#7c3aed);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.8rem;color:white;box-shadow:0 0 20px rgba(124,58,237,0.5);opacity:1;}
+.play-btn:hover{box-shadow:0 0 30px rgba(124,58,237,0.8);transform:scale(1.1);}
+.lyrics-quote{margin-top:20px;font-family:'Dancing Script',cursive;color:#d8b4fe;font-size:1.1rem;opacity:0.8;}
+
+/* Acrostic Reasons Section */
+.reasons-section{padding:80px 20px;}
+.reasons-container{max-width:800px;width:100%;}
+.reasons-subtitle{font-family:'Dancing Script',cursive;font-size:1.5rem;color:#d8b4fe;margin-bottom:40px;opacity:0;transform:translateY(20px);}
+.reasons-subtitle.show{animation:fadeInUp 0.8s ease forwards;}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+.acrostic-list{display:flex;flex-direction:column;gap:20px;}
+.acrostic-card{
+background:rgba(255,255,255,0.1);border-radius:16px;padding:28px 32px;display:flex;align-items:flex-start;gap:25px;
+box-shadow:0 8px 32px rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px);
+position:relative;opacity:0;transform:translateX(-30px);transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.acrostic-card.show{opacity:1;transform:translateX(0);}
+.acrostic-card:hover{transform:translateX(10px);background:rgba(255,255,255,0.15);border-color:rgba(192,132,252,0.5);box-shadow:0 0 20px rgba(192,132,252,0.3);}
+.acrostic-letter{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:600;color:#e9d5ff;text-shadow:0 0 15px rgba(168,85,247,0.6);line-height:1;min-width:80px;text-align:center;position:relative;}
+.acrostic-letter::after{content:attr(data-number);position:absolute;top:-10px;right:-10px;font-family:'Poppins',sans-serif;font-size:0.9rem;color:#d8b4fe;font-weight:500;text-shadow:none;}
+.acrostic-content{flex:1;text-align:left;}
+.acrostic-month{font-family:'Poppins',sans-serif;font-size:0.75rem;font-weight:600;color:#c084fc;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+.acrostic-text{font-family:'Dancing Script',cursive;font-size:1.35rem;color:#fff;line-height:1.5;}
+.acrostic-text strong{color:#e9d5ff;font-weight:700;text-shadow:0 0 5px rgba(168,85,247,0.5);}
+.acrostic-card::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:0;background:linear-gradient(180deg,#c084fc,#7c3aed);border-radius:2px;transition:height 0.4s ease;}
+.acrostic-card:hover::before{height:60%;}
+
+/* MODAL STYLES & BOUQUET */
+.modal{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+display:flex;justify-content:center;align-items:center;
+opacity:0;pointer-events:none;transition:0.4s;backdrop-filter:blur(8px);
+z-index:100;
+}
+.modal.active{opacity:1;pointer-events:auto}
+
+.modal-content{
+/* Dark purple background matching image */
+background:linear-gradient(135deg, #3b0764, #581c87);
+padding:40px;
+border-radius:30px;
+max-width:450px;
+width:90%;
+box-shadow:0 20px 60px rgba(88, 28, 135, 0.5);
+color:white;
+border:1px solid rgba(255,255,255,0.1);
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    margin-top: 10px; /* Space from bouquet */
+}
+
+.modal p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e9d5ff;
+    margin-bottom: 30px;
+}
+
+/* Close Button matching image */
+.modal-btn {
+    background: #a855f7;
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 50px; /* Pill shape */
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: transform 0.2s;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.modal-btn:hover { transform: scale(1.05); }
+
+/* BOUQUET STYLES INSIDE MODAL */
+.bouquet-container {
+    position: relative;
+    width: 160px; /* Compact width */
+    height: 140px; 
+    margin: 0 auto 10px auto; /* Centered */
+    z-index: 2;
+}
+
+/* The pink wrapping paper */
+.bouquet-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 70px solid #fbcfe8; /* Pink color */
+    z-index: 5;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+}
+
+/* A small bow */
+.bouquet-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -80px; /* Position at top of wrapper */
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background: #f472b6;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Tulip styling (Miniature) */
+.b-tulip {
+    position: absolute;
+    width: 25px;
+    height: 90px;
+    bottom: 10px;
+    left: 50%;
+    transform-origin: bottom center;
+    z-index: 1;
+}
+
+.b-head {
+    width: 20px;
+    height: 25px;
+    background: linear-gradient(to top, #d946ef, #f472b6);
+    border-radius: 0 0 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 2.5px;
+    box-shadow: 0 0 5px rgba(236, 72, 153, 0.4);
+}
+
+.b-stem {
+    width: 3px;
+    height: 70px;
+    background: #16a34a;
+    position: absolute;
+    bottom: 0;
+    left: 11px;
+}
+
+/* Fan out the flowers */
+.b-tulip:nth-child(1) { transform: translateX(-50%) rotate(-35deg); height: 80px; }
+.b-tulip:nth-child(2) { transform: translateX(-50%) rotate(-18deg); height: 95px; z-index: 2; }
+.b-tulip:nth-child(3) { transform: translateX(-50%) rotate(0deg); height: 100px; z-index: 3; }
+.b-tulip:nth-child(4) { transform: translateX(-50%) rotate(18deg); height: 95px; z-index: 2; }
+.b-tulip:nth-child(5) { transform: translateX(-50%) rotate(35deg); height: 80px; }
+
+/* Gentle swaying animation */
+.b-tulip { animation: bouquetSway 3s ease-in-out infinite alternate; }
+.b-tulip:nth-child(even) { animation-delay: 1s; }
+
+@keyframes bouquetSway {
+    from { transform: translateX(-50%) rotate(var(--r, 0deg)) rotate(-2deg); }
+    to { transform: translateX(-50%) rotate(var(--r, 0deg)) rotate(2deg); }
+}
+
+/* Footer */
+footer{padding:30px;text-align:center;background:rgba(0,0,0,0.2);color:#d8b4fe;font-family:'Dancing Script',cursive;font-size:1.2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.fade{opacity:0;transform:translateY(20px);transition:all 1s ease}
+.fade.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){
+h1{font-size:2rem}
+h2{font-size:1.6rem}
+.acrostic-letter{font-size:3rem;min-width:60px}
+.acrostic-text{font-size:1.15rem}
+.acrostic-card{padding:20px;gap:15px;flex-direction:column;align-items:center;text-align:center}
+.acrostic-content{text-align:center}
+.music-container{padding:25px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- YouTube Player API (Modified for better compatibility) -->
+<!-- 1x1 pixel iframe instead of hidden div to avoid browser optimization blocking -->
+<div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0;"></div>
+
+<section>
+<h1>Happy Birthday, My Love 💜</h1>
+<p>February 22 – The Day My Favorite Person Was Born</p>
+<button class="btn" onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'})">Click Me 💕</button>
+</section>
+
+<section id="letter" class="fade">
+<h2>My Sweetest Baby 💌</h2>
+<p>
+Happy birthday, my baby. I just want you to know that ever since you came into my life, everything has felt lighter and more meaningful. You bring me so much peace, happiness, and comfort just by being you. On my hardest days, you’re my strength, and on my best days, you’re the one I want to share them with.
+
+My wish for you is to have a successful final demo, clarity in everything you do, and peace of mind no matter what happens. I know how hard you’ve worked, and I’m so proud of you.
+
+Enjoy your day, my baby. You deserve all the happiness in the world. I love you so much. 💕
+</p>
+</section>
+
+<section>
+<h2>My Beautiful Girl 💜</h2>
+<div class="grid photos">
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="BABY1.jpeg" alt="My Beautiful Girl 💜">
+  </div>
+</div>
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="BABY2.jpeg" alt="My Beautiful Girl 💜">
+  </div>
+</div>
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="BABY3.jpeg" alt="My Beautiful Girl 💜">
+  </div>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Our Favorite Memories 💕</h2>
+<div class="grid memories">
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="US1.jpeg" alt="Memory 1">
+  </div>
+</div>
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="US2.jpeg" alt="Memory 2">
+  </div>
+</div>
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="US3.jpeg" alt="Memory 3">
+  </div>
+</div>
+<div class="card">
+  <div class="photo-placeholder">
+    <img src="US4.jpeg" alt="Memory 4">
+  </div>
+</div>
+</div>
+</section>
+
+<!-- MUSIC PLAYER SECTION -->
+<section class="music-section fade">
+<h2 style="font-family:'Playfair Display',serif; margin-bottom:10px;">🎵 The Soundtrack of Us 🎵</h2>
+<div class="music-container">
+<div class="song-info">
+  <div class="album-art" id="albumArt">
+    <img src="https://i.ytimg.com/vi/TNZYNPs4Q7Q/maxresdefault.jpg" alt="Love Is Album Art">
+  </div>
+  <div class="song-title">Love Is</div>
+  <div class="artist-name">The Ridleys</div>
+</div>
+<div class="progress-container" id="progressContainer"><div class="progress-bar" id="progressBar"></div></div>
+<div class="controls">
+  <button class="control-btn" onclick="seek(-10)">⏪</button>
+  <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+  <button class="control-btn" onclick="seek(10)">⏩</button>
+</div>
+<div class="lyrics-quote">"If you ask me what love is, I'd shrug and I'd smile..."</div>
+<div style="margin-top:15px; font-size:0.7rem; color:#a78bfa; opacity:0.6;">Source: YouTube (Official Audio)</div>
+</div>
+</section>
+
+<!-- Acrostic Reasons Section -->
+<section class="reasons-section" id="reasons-section">
+<div class="reasons-container">
+<h2>Reasons Why I Love You</h2>
+<p class="reasons-subtitle">Every letter of your name holds a reason my heart beats for you...</p>
+<div class="acrostic-list" id="acrosticList"></div>
+</div>
+</section>
+
+<!-- Countdown REMOVED -->
+
+<section>
+<button class="btn" onclick="openModal()">Open Your Surprise 💝</button>
+</section>
+
+<!-- MODAL WITH BOUQUET -->
+<div class="modal" id="modal">
+<div class="modal-content">
+  <!-- Bouquet Animation Inside Modal -->
+  <div class="bouquet-container">
+    <div class="b-tulip" style="--r: -35deg"><div class="b-head"></div><div class="b-stem"></div></div>
+    <div class="b-tulip" style="--r: -18deg"><div class="b-head"></div><div class="b-stem"></div></div>
+    <div class="b-tulip" style="--r: 0deg"><div class="b-head"></div><div class="b-stem"></div></div>
+    <div class="b-tulip" style="--r: 18deg"><div class="b-head"></div><div class="b-stem"></div></div>
+    <div class="b-tulip" style="--r: 35deg"><div class="b-head"></div><div class="b-stem"></div></div>
+    <div class="bouquet-wrapper"></div>
+  </div>
+
+  <h2>My Forever 💜</h2>
+  <p>You are my today, my tomorrow, and every beautiful day after that. 
+  No matter where life takes us, my heart will always belong to you.</p>
+  <button class="modal-btn" onclick="closeModal()">Close 💕</button>
+</div>
+</div>
+
+<footer>
+Forever Yours, Shannong 💜
+</footer>
+
+<script>
+// --- YOUTUBE API MUSIC PLAYER FIX ---
+var player;
+var isPlaying = false;
+var progressInterval;
+
+// Load YouTube IFrame API
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtube-player', {
+    height: '1', width: '1', videoId: 'TNZYNPs4Q7Q', // The Ridleys - Love Is
+    playerVars: {
+      'playsinline': 1,
+      'controls': 0,
+      'disablekb': 1,
+      'origin': window.location.origin // Helps with CORS issues
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange,
+      'onError': onPlayerError
+    }
+  });
+}
+
+function onPlayerReady(event) { 
+  // Player is ready, enable button
+  document.getElementById("playBtn").style.opacity = "1";
+  document.getElementById("playBtn").style.cursor = "pointer";
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    isPlaying = true;
+    document.getElementById("playBtn").innerHTML = "⏸";
+    document.getElementById("albumArt").classList.add("playing");
+    startProgress();
+  } else {
+    isPlaying = false;
+    document.getElementById("playBtn").innerHTML = "▶";
+    document.getElementById("albumArt").classList.remove("playing");
+    stopProgress();
+  }
+}
+
+function onPlayerError(event) {
+  console.log("YouTube Player Error:", event.data);
+  alert("Could not load music. Please check your internet connection.");
+}
+
+function togglePlay() { 
+  if(!player) return;
+  if (isPlaying) {
+    player.pauseVideo();
+  } else {
+    player.playVideo();
+  }
+}
+
+function seek(seconds) { 
+  if(!player) return;
+  var currentTime = player.getCurrentTime(); 
+  player.seekTo(currentTime + seconds, true); 
+}
+
+function startProgress() {
+  stopProgress();
+  progressInterval = setInterval(function() {
+    if(!player || !player.getCurrentTime) return;
+    var currentTime = player.getCurrentTime();
+    var duration = player.getDuration();
+    if(duration > 0) {
+      var percent = (currentTime / duration) * 100;
+      document.getElementById("progressBar").style.width = percent + "%";
+    }
+  }, 1000);
+}
+function stopProgress() { clearInterval(progressInterval); }
+
+// --- SITE JS ---
+const heartsContainer=document.getElementById("hearts");
+const heartEmojis=['💜','🔮','✨','☂️','🦄','🪁'];
+for(let i=0;i<30;i++){
+let heart=document.createElement("span");
+heart.innerHTML=heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(10+Math.random()*20)+"px";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+heart.style.color='rgba(216,180,254,0.7)';
+heartsContainer.appendChild(heart);
+}
+
+const acrosticData=[
+{letter:"J",text:"<strong>J</strong>oy that overflows from your beautiful heart. You make every day feel like a celebration."},
+{letter:"A",text:"<strong>A</strong>ngel sent from above to watch over my soul. Your kindness knows no bounds."},
+{letter:"Y",text:"<strong>Y</strong>earning of my heart, finally fulfilled. You are the answer to every prayer."},
+{letter:"C",text:"<strong>C</strong>omfort in my darkest nights, my safe harbor. With you, I am always home."},
+{letter:"E",text:"<strong>E</strong>verything I never knew I needed. You complete me in ways I never imagined."},
+{letter:"L",text:"<strong>L</strong>ove that grows deeper with every sunrise. My heart is yours, forever and always."},
+{letter:"L",text:"<strong>L</strong>ight that guides me through every storm. You are my forever and my always."}
+];
+
+const acrosticList=document.getElementById("acrosticList");
+acrosticData.forEach((item,index)=>{
+const card=document.createElement("div");
+card.className="acrostic-card";
+card.style.transitionDelay=`${index*0.1}s`;
+card.innerHTML=`<div class="acrostic-letter" data-number="${index+1}">${item.letter}</div><div class="acrostic-content"><div class="acrostic-month">${item.month}</div><div class="acrostic-text">${item.text}</div></div>`;
+acrosticList.appendChild(card);
+});
+
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});},{threshold:0.15});
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+observer.observe(document.querySelector(".reasons-subtitle"));
+document.querySelectorAll(".acrostic-card").forEach(card=>observer.observe(card));
+
+function openModal(){document.getElementById("modal").classList.add("active")}
+function closeModal(){document.getElementById("modal").classList.remove("active")}
+</script>
+
+</body>
+</html>
